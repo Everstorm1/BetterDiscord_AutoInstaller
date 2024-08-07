@@ -8,10 +8,10 @@ For easier use I recommend making a shortcut to the .exe
 # What it does:
 With the BetterDiscordAutoInjector.exe the .asar file will be automatically injected in the chosen path into the newest version of Discord.\
 If BetterDiscord is already injected: nothing will happen and the program terminates.\
-If BetterDiscord is not already injected: Discord will be closed and BetterDiscord injected, you can then reopen Discord.\
+If BetterDiscord is not already injected: Discord will be closed and BetterDiscord injected, you can then reopen Discord.
 
 > [!IMPORTANT]
-> Discord will NOT be reopened after injection by the BetterDiscordAutoInjector.exe, you will need to do that manually
+> Discord will NOT be reopened after injection by the BetterDiscordAutoInjector.exe, you will need to do that manually. \
 > The autoInstallerPLUS.cpp in the prototype folder however WILL reopen Discord after injection. But since the code still contains bugs I left it out of the current version of the installer. Read the prototype section on how to make it work if you wish to try.
 
 

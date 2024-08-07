@@ -1,5 +1,5 @@
 # How-to-use:
-There are 2 folders that are important to you. In the betterDiscord_ASAR folder you need to put the betterdiscord.asar file that you want to inject into discord (you can get it from the official BetterDiscord GitHub Repo)
+There are 2 folders that are important for you. In the betterDiscord_ASAR folder you need to put the betterdiscord.asar file that you want to inject into discord (you can get it from the official BetterDiscord GitHub Repo)
 The second folder is **finder_TXT** where you **MUST** add your username to the path in the second line! Otherwise the installer will NOT work!
 
 After doing this you can start the BetterDiscordAutoInjector.exe which will inject BetterDiscord automatically into the selected path. The .exe needs to be in the same directory as the finder_TXT, betterDiscord_ASAR and index_JSON folders, otherwise it will NOT work.

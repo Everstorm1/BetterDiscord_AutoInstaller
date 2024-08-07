@@ -18,11 +18,9 @@ The autoInstallerPLUS.cpp in the prototype folder however WILL reopen Discord af
 ## Prototype
 If you wish to use the autoInstallerPLUS (which will reopen Discord after injection) you will have to compile the autoInstallerPLUS.cpp. For this the .cpp file needs to be in the same directory as the finder_TXT, index_JSON and betterDiscord_ASAR folders.
 You will also need to change the path variable to the Discord.exe in the main() function of the .cpp to contain your username, otherwise it will NOT work (currently set to /User/{User name}/...).
-After you added your username and put the autoInstallerPLUS.cpp into the correct directory you can compile with
-\n
+After you added your username and put the autoInstallerPLUS.cpp into the correct directory you can compile with\
 ``
 g++ -o BetterDiscordAutoInjectorPLUS .\autoInstallerPlus.cpp
-``
-\n
+``\
 for example.
 Good luck :)

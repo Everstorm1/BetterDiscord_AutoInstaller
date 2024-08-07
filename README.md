@@ -10,10 +10,10 @@ With the BetterDiscordAutoInjector.exe the .asar file will be automatically inje
 If BetterDiscord is already injected: nothing will happen and the program terminates.
 If BetterDiscord is not already injected: Discord will be closed and BetterDiscord injected, you can then reopen Discord.
 
-----
+---
 Discord will NOT be reopened after injection by the BetterDiscordAutoInjector.exe, you will need to do that manually
 The autoInstallerPLUS.cpp in the prototype folder however WILL reopen Discord after injection. But since the code still contains bugs I left it out of the current version of the installer. Read the prototype section on how to make it work if you wish to try.
-----
+---
 
 ## Prototype
 If you wish to use the autoInstallerPLUS (which will reopen Discord after injection) you will have to compile the autoInstallerPLUS.cpp. For this the .cpp file needs to be in the same directory as the finder_TXT, index_JSON and betterDiscord_ASAR folders.

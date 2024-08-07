@@ -195,7 +195,7 @@ int main(){
         std::cout << "Injected BetterDiscord successfully! You may now start Discord :)" << std::endl;
 
 
-        //--------------------------- add user name here !! ---------------------------------------------------------------------------------------
+        //--------------------------- add user name here !! -----------------------------------------------------------------------------------------------------------------------------------
         std::wstring discordPath = L"C:\\Users\\{user name}\\AppData\\Local\\Discord\\app-1.0.9157\\Discord.exe";
     
         if (startProcess(discordPath)) {

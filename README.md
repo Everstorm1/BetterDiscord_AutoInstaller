@@ -26,7 +26,7 @@ You will also need to change the path variable to the Discord.exe in the main() 
 std::wstring discordPath = L"C:\\Users\\{user name}\\AppData\\Local\\Discord\\app-1.0.9157\\Discord.exe";
 ```
 )  \
-After you added your username and put the autoInstallerPLUS.cpp into the correct directory you can compile with \
+After you added your username and put the autoInstallerPLUS.cpp into the correct directory you can compile with
 ```console
 g++ -o BetterDiscordAutoInjectorPLUS .\autoInstallerPLUS.cpp
 ```

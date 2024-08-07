@@ -6,9 +6,9 @@ After doing this you can start the BetterDiscordAutoInjector.exe which will inje
 For easier use I recommend making a shortcut to the .exe
 
 # What it does:
-With the BetterDiscordAutoInjector.exe the .asar file will be automatically injected in the chosen path into the newest version of Discord.
-If BetterDiscord is already injected: nothing will happen and the program terminates.
-If BetterDiscord is not already injected: Discord will be closed and BetterDiscord injected, you can then reopen Discord.
+With the BetterDiscordAutoInjector.exe the .asar file will be automatically injected in the chosen path into the newest version of Discord.\
+If BetterDiscord is already injected: nothing will happen and the program terminates.\
+If BetterDiscord is not already injected: Discord will be closed and BetterDiscord injected, you can then reopen Discord.\
 
 > [!IMPORTANT]
 > Discord will NOT be reopened after injection by the BetterDiscordAutoInjector.exe, you will need to do that manually

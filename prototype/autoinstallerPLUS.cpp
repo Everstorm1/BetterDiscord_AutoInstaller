@@ -166,6 +166,15 @@ bool startProcess(const std::wstring& applicationPath) {
     return true;
 }
 
+std::wstring StringToWString(const std::string& str)
+{
+	std::wstring wstr;
+	size_t size;
+	wstr.resize(str.length());
+	mbstowcs_s(&size,&wstr[0],wstr.size()+1,str.c_str(),str.size());
+	return wstr;
+}
+
 // but it works.. - rest of the (simple) code written by me (Everstorm1)  -----------------------------------------
 
 int main(){
@@ -180,6 +189,8 @@ int main(){
     //find path to discord_desktop_core
     std::string pathToCore = getPathToCore(newestAppDir);
     
+    std::cout << newestAppDir << std::endl;
+ 
     // ---- until here the code only retrieves the needed directory, jesus christ ----
 
     //check if betterdiscord.asar already exists (if it does, then better Discord is already injected)
@@ -194,9 +205,7 @@ int main(){
 
         std::cout << "Injected BetterDiscord successfully! You may now start Discord :)" << std::endl;
 
-
-        //--------------------------- add user name here !! -----------------------------------------------------------------------------------------------------------------------------------
-        std::wstring discordPath = L"C:\\Users\\{user name}\\AppData\\Local\\Discord\\app-1.0.9157\\Discord.exe";
+        std::wstring discordPath = StringToWString(newestAppDir) + L"/Discord.exe";
     
         if (startProcess(discordPath)) {
             std::wcout << L"Waiting for Discord to start..." << std::endl;

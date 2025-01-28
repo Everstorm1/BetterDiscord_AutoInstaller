@@ -1,7 +1,7 @@
 # How-to-use:
-Locate the *finder_TXT* folder and open the *finder.txt* file. Here you **MUST** add your username to the path in the second line! Otherwise the installer will NOT work!
-Here you can also select whether the program should automatically update BetterDiscord aswell or if it should only inject the betterdiscord.asar you manually chose (There is already a *betterdiscord.asar* file in the *betterDiscord_ASAR* folder that you can replace if you want a specific version). 
-So choose either *true* or *false* in line 5 of the *finder.txt* file.
+Locate the *finder_TXT* folder and open the *finder.txt* file. Here you **MUST** add your username to the path in the second line! Otherwise the installer will NOT work! \
+Here you can also select whether the program should automatically update BetterDiscord aswell or if it should only inject the betterdiscord.asar you manually chose (There is already a *betterdiscord.asar* file in the *betterDiscord_ASAR* folder that you can replace if you want a specific version). \
+So choose either *true* or *false* in line 5 of the *finder.txt* file. 
 
 (If you want to manually select a .asar file you can get them here: https://github.com/BetterDiscord/BetterDiscord/releases)
 

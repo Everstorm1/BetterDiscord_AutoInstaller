@@ -1,17 +1,20 @@
 # How-to-use:
-There are 2 folders that are important for you. In the betterDiscord_ASAR folder you need to put the betterdiscord.asar file that you want to inject into discord (you can get it from the official BetterDiscord GitHub Repo here https://github.com/BetterDiscord/BetterDiscord/releases)
-The second folder is **finder_TXT** where you **MUST** add your username to the path in the second line! Otherwise the installer will NOT work!
+Locate the *finder_TXT* folder and open the *finder.txt* file. Here you **MUST** add your username to the path in the second line! Otherwise the installer will NOT work!
+Here you can also select whether the program should automatically update BetterDiscord aswell or if it should only inject the betterdiscord.asar you manually chose (There is already a *betterdiscord.asar* file in the *betterDiscord_ASAR* folder that you can replace if you want a specific version). 
+So choose either *true* or *false* in line 5 of the *finder.txt* file.
 
-After doing this you can start the BetterDiscordAutoInjector.exe which will inject BetterDiscord automatically into the selected path. The .exe needs to be in the same directory as the finder_TXT, betterDiscord_ASAR and index_JSON folders, otherwise it will NOT work.
-For easier use I recommend making a shortcut to the .exe
+(If you want to manually select a .asar file you can get them here: https://github.com/BetterDiscord/BetterDiscord/releases)
+
+After doing this you can start the autoinstaller.exe which will inject BetterDiscord automatically into the selected path and, depending on what you selected, update BetterDiscord beforehand. The .exe needs to be in the same directory as the finder_TXT, betterDiscord_ASAR and index_JSON folders, otherwise it will **NOT** work.
+For easier use I recommend making a shortcut to the autoinstaller.exe to your desktop for example.
 
 # What it does:
-With the BetterDiscordAutoInjector.exe the .asar file will be automatically injected in the chosen path into the newest version of Discord.\
-If BetterDiscord is already injected: nothing will happen and the program terminates.\
+With the autoinstaller.exe the .asar file will be automatically injected in the chosen path into the newest version of Discord.\
+If BetterDiscord is already injected and up to date: nothing will happen and the program terminates.\
 If BetterDiscord is not already injected: Discord will be closed and BetterDiscord injected, you can then reopen Discord.
 
 > [!IMPORTANT]
-> Discord will NOT be reopened after injection by the BetterDiscordAutoInjector.exe, you will need to do that manually. \
+> Discord will NOT be reopened after injection by the autoinstaller.exe, you will need to do that manually. \
 > The autoInstallerPLUS.cpp in the prototype folder however WILL reopen Discord after injection. But since the code still contains bugs I left it out of the current version of the installer. Read the prototype section on how to make it work if you wish to try.
 
 

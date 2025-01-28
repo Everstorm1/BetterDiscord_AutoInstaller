@@ -5,16 +5,45 @@
 #include <filesystem>
 #include <fstream>
 #include <vector>
+#include <sstream>
+#include <iomanip>
+#include <algorithm>
+#include <cctype>
+
+bool autoASAR = false;
+std::string ASAR_v_file = "";
+
+bool to_bool(std::string str){
+    std::transform(str.begin(), str.end(), str.begin(), ::tolower);
+    std::istringstream is(str);
+    bool b;
+    is >> std::boolalpha >> b;
+    return b;
+}
 
 std::string getLocalPath(){
     std::ifstream finderFile("finder_TXT/finder.txt");
     std::string path_to_localDiscord;
 
     //twice for line 2
+    std::cout << "get local path.." << std::endl;
     std::getline(finderFile, path_to_localDiscord);
     std::getline(finderFile, path_to_localDiscord);
 
+    //thrice for line 5
+    std::string val;
+    std::getline(finderFile, val);
+    std::getline(finderFile, val);
+    std::getline(finderFile, val);
+    autoASAR = to_bool(val);
+    std::cout << "auto asar?: " << autoASAR << std::endl;
+    
     finderFile.close();
+
+    std::ifstream versionFile("finder_TXT/BD_version.txt");
+    //first line
+    std::getline(versionFile, ASAR_v_file);
+    versionFile.close();
 
     return path_to_localDiscord;
 }
@@ -65,6 +94,7 @@ std::string getPathToCore(std::string& currentPath){
 
 void injectBetterDiscord(std::string pathToCore){
     //for creating the .asar
+    std::cout << "copy .asar to core.." << std::endl;
     std::string pathToBetterDiscordASAR = "betterDiscord_ASAR/betterdiscord.asar";
     std::string pathToASARDestination = pathToCore + "/betterdiscord.asar";
     // Remove the destination file if it exists
@@ -119,6 +149,84 @@ void terminateProcess(const std::wstring& processName) {
 }
 // but it works.. - rest of the (simple) code written by me (Everstorm1)  -----------------------------------------
 
+std::string getAsarVersion(){
+
+    std::cout << "Check for new BetterDiscord versions.." << std::endl;
+
+    #ifdef _WIN32
+    std::system("powershell -Command \"Invoke-WebRequest -Uri 'https://api.github.com/repos/BetterDiscord/BetterDiscord/tags' -OutFile tags.json\"");
+    #else
+    std::system("wget -qO tags.json https://api.github.com/repos/BetterDiscord/BetterDiscord/tags");
+    #endif
+
+    std::ifstream file("tags.json");
+
+    std::string line, latestTag;
+    while (std::getline(file, line)) {
+        size_t pos = line.find("\"name\":\"v");
+        if (pos != std::string::npos) {
+            latestTag = line.substr(pos + 8);
+            latestTag = latestTag.substr(0, latestTag.find_first_of("\""));
+            break;
+        }
+    }
+
+    file.close();
+    std::system("del tags.json"); // Delete temp file
+
+    std::cout << "Latest BetterDiscord version: " << latestTag << std::endl;
+    return latestTag;
+}
+
+bool ASAR_version_match(){
+    std::string currentVersion = getAsarVersion();
+
+    if(currentVersion == ASAR_v_file){
+        std::cout << "Versions match!" << std::endl;
+        return true;
+    }
+    ASAR_v_file = currentVersion;
+    std::cout << "Versions do NOT match. Proceeding to download newest betterDiscord.asar" << std::endl;
+    return false;
+}
+
+void replace_asar(std::string version){
+
+    std::system("del \"betterDiscord_ASAR\\betterdiscord.asar\""); // Delete old .asar file
+
+    std::string pathToVERSION = "finder_TXT/BD_version.txt";
+    std::string url = "https://github.com/BetterDiscord/BetterDiscord/releases/download/" + version + "/betterdiscord.asar";
+    std::string outputFile = "betterDiscord_ASAR/betterdiscord.asar";
+
+    #ifdef _WIN32
+    std::string command = "powershell -Command \"Invoke-WebRequest -Uri '" + url + "' -OutFile '" + outputFile + "'\"";
+    #else
+    std::string command = "wget -O " + outputFile + " " + url;
+    #endif
+    int result = std::system(command.c_str());
+    
+    if (result == 0) {
+        std::cout << "Download successfull: " << outputFile << std::endl;
+
+        //Update version in BD_version.txt
+        //del old file
+        if (std::filesystem::exists(pathToVERSION)) 
+        {
+            std::filesystem::remove(pathToVERSION);
+        }
+        //create new
+        std::ofstream file{"finder_TXT/BD_version.txt"};
+        //add new content
+        file << version;
+        file.close();
+
+    } else {
+        std::cerr << "Download failed! Insert .asar manually!" << std::endl;
+    }
+}
+
+
+
 int main(){
     //kill Discord
     terminateProcess(L"Discord.exe"); //Don't ask me about how this function works..
@@ -133,18 +241,51 @@ int main(){
     
     // ---- until here the code only retrieves the needed directory, jesus christ ----
 
-    //check if betterdiscord.asar already exists (if it does, then better Discord is already injected)
-    if(std::filesystem::exists(pathToCore + "/betterdiscord.asar")){
-        //exists - start Discord
-        std::cout << "BetterDiscord is already injected! You can already start Discord :P" << std::endl;
-        return 0;
-    }else{
-        //does not exist, create and inject, wait
-        injectBetterDiscord(pathToCore);
-        Sleep(500);
 
-        std::cout << "Injected BetterDiscord successfully! You may now start Discord :)" << std::endl;
+    //check if ASAR_autoupdate is enabled
+    if(autoASAR){
+        //check if versions match
+        bool versionIsMatching = ASAR_version_match();
+        if(versionIsMatching){
+            //versions match, check if BD ist installed
+            if(std::filesystem::exists(pathToCore + "/betterdiscord.asar")){
+                //exists - start Discord
+                std::cout << "\n" << "BetterDiscord is already injected! You can already start Discord :P" << std::endl;
+
+            }else{
+                //does not exist, create and inject, wait
+                injectBetterDiscord(pathToCore);
+                Sleep(500);
+
+                std::cout << "\n" << "Injected BetterDiscord successfully! You may now start Discord :)" << std::endl;
+            }
+        }
+        else{
+            //versions don't match, renew .asar
+            replace_asar(ASAR_v_file);
+            //then inject as normal
+            injectBetterDiscord(pathToCore);
+            Sleep(500);
+
+            std::cout << "\n" << "Injected BetterDiscord successfully! You may now start Discord :)" << std::endl;
+        }
+    }else{
+        //normal procedure
+        //check if betterdiscord.asar already exists (if it does, then better Discord is already injected)
+        if(std::filesystem::exists(pathToCore + "/betterdiscord.asar")){
+            //exists - start Discord
+            std::cout << "\n" << "BetterDiscord is already injected! You can already start Discord :P" << std::endl;
+
+        }else{
+            //does not exist, create and inject, wait
+            injectBetterDiscord(pathToCore);
+            Sleep(500);
+
+            std::cout << "Injected BetterDiscord successfully! You may now start Discord :)" << std::endl;
+        }
     }
 
+    std::cout << "\n" << "\n" << "Press any key to exit.." << std::endl;
+    std::getchar();
     return 0;
 }

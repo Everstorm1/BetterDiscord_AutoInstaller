@@ -1,2 +1,6 @@
--- Path to the Local AppData of Discord below (needs to be in line 2 without '"' to work) --
+-- Path to the Local AppData of Discord below (needs to be in line 2 without '"' to work) -- 
 C:/Users/{User Name}/AppData/Local/Discord
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ MUST BE IN LINE 2!
+-- Download newest BetterDiscord.asar file automatically? (true/false)
+true
+^^^^ MUST BE IN LINE 5!

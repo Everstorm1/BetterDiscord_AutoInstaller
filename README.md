@@ -1,3 +1,6 @@
+### Info:
+Updated the code to work with the latest Discord update (April 10, 2025). Just replace the .exe with the new one.
+
 # How-to-use:
 Locate the *finder_TXT* folder and open the *finder.txt* file. Here you **MUST** add your username to the path in the second line! Otherwise the installer will NOT work! \
 Here you can also select whether the program should automatically update BetterDiscord aswell or if it should only inject the betterdiscord.asar you manually chose (There is already a *betterdiscord.asar* file in the *betterDiscord_ASAR* folder that you can replace if you want a specific version). \
@@ -31,7 +34,7 @@ std::wstring discordPath = L"C:\\Users\\{user name}\\AppData\\Local\\Discord\\ap
 )  \
 After you added your username and put the autoInstallerPLUS.cpp into the correct directory you can compile with
 ```console
-g++ -o BetterDiscordAutoInjectorPLUS .\autoInstallerPLUS.cpp
+g++ -m64 -static -o BetterDiscordAutoInjectorPLUS .\autoInstallerPLUS.cpp
 ```
 \
 for example.

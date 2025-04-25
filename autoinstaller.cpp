@@ -86,7 +86,7 @@ std::string getPathToNewestVersion(std::vector<std::string>& allDirs, std::strin
 }
 
 std::string getPathToCore(std::string& currentPath){
-    std::string corePathExtension = "/modules/discord_desktop_core-2/discord_desktop_core";
+    std::string corePathExtension = "/modules/discord_desktop_core-1/discord_desktop_core";
     std::string fullPath = currentPath + corePathExtension;
 
     return fullPath;
